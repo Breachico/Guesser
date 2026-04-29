@@ -106,12 +106,33 @@ TEST(GuesserTest, secret_match_newline_character)
 
 
 
-/***  ***/
-TEST(GuesserTest, secret_match)
+TEST(GuesserTest, secret_dist_leading_spaces)
 {
-  string pass = "secret";
+  string pass = "    secret";
   Guesser object(pass);
-  ASSERT_EQ( object.match("secert"), false );
+  ASSERT_EQ( object.distance(pass), true );
 }
+
+TEST(GuesserTest, secret_dist_trailing_spaces)
+{
+  string pass = "secret    ";
+  Guesser object(pass);
+  ASSERT_EQ( object.distance(pass), true );
+}
+
+TEST(GuesserTest, secret_dist_empty_string)
+{
+  string pass = "";
+  Guesser object(pass);
+  ASSERT_EQ( object.distance(pass), true );
+}
+
+TEST(GuesserTest, secret_dist_newline_character)
+{
+  string pass = "\n";
+  Guesser object(pass);
+  ASSERT_EQ( object.distance(pass), true );
+}
+
 
 
