@@ -60,11 +60,17 @@ TEST(GuesserTest, secret_match_distance_1_char_shorter)
   ASSERT_EQ( object.distance("secre"), 1 );
 }
 
+TEST(GuesserTest, secret_match_distance_1_char_longer)
+{
+  string pass = "secret";
+  Guesser object(pass);
+  ASSERT_EQ( object.distance("secrett"), 1 );
+}
 
 /*** Other Constructer Test ***/
 TEST(GuesserTest, secret_constructer_max_length_32)
 {
-  string pass = "secretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecret";
+  string pass = "secretsecretsecretsecretsecretsecretsecretsnaoehicreoaisnhceiisnchaoecridesnatbkcrarecoahsecretsecretsecretsecretsecret";
   Guesser object(pass);
   ASSERT_EQ( object.match(pass.substr(0,32)), true );
 }
